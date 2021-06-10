@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.daoyundev.mapper.SyaparaMapper">
+    <select id="queryAllpara" resultType="com.zx.daoyundev.entity.Syapara">
+        select * from syapara
+    </select>
+<!--    <select id="getcountBykeyword" resultType="java.lang.Integer">-->
+<!--        select count(*) from syapara where keyword = #{keyword}-->
+<!--    </select>-->
+    <insert id="addpara" useGeneratedKeys="false" keyProperty="sysparaid">
+        insert into syapara(hintname, keyword, value) values (#{hintname},#{keyword},#{value})
+    </insert>
+    <select id="getparaBykeyword" resultType="com.zx.daoyundev.entity.Syapara">
+        select * from syapara where keyword = #{keyword}
+    </select>
+    <update id="updateparaBykeyword" parameterType="com.zx.daoyundev.entity.Syapara">
+        update  syapara
+<!--        <set>-->
+<!--            <if test="hintname!=null and hintname!=''">hintname=#{hintname}</if>-->
+<!--            <if test="value!=null and value!=''">value=#{value}</if>-->
+<!--        </set>-->
+        set hintname = #{hintname},value = #{value}
+        where keyword=#{keyword}
+    </update>
+    <delete id="deleteparaById" parameterType="long">
+        delete from syapara where sysparaid=#{sysparaid}
+    </delete>
+
+</mapper>
