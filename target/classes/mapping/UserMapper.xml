@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.daoyundev.mapper.UserMapper">
+    <insert id="add" useGeneratedKeys="false" keyProperty="id">
+        insert into user(userName, userPassward, tel) values (#{userName},#{userPassward},#{tel})
+    </insert>
+    <select id="SelectByTel" resultType="com.zx.daoyundev.entity.User" >
+        select * from user where tel = #{tel}
+    </select>
+    <select id="findOne" resultType="com.zx.daoyundev.entity.User">
+        select * from user
+        <where>
+            <!-- 重复说一下，id 不能是 int，int 默认是 0，不可能是 null, 而 Integer 可以是 null-->
+            <if test="userId!=null">
+                userId=#{userId}
+            </if>
+            <if test="tel!=null">
+                and tel=#{tel}
+            </if>
+        </where>
+    </select>
+
+</mapper>
