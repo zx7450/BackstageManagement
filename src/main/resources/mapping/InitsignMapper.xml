@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zx.daoyundev.mapper.InitsignMapper">
+
+    <select id="gethistorybyCourseid" resultType="com.zx.daoyundev.entity.Initsign" >
+        select * from initsign where courseId = #{courseId} and ((sightype = 2 and isEnd = 2) or (sightype = 1 and endtime &lt;=  #{endtime})) order by begtime desc
+    </select>
+    <select id="getinitsignbyteachersignId" resultType="com.zx.daoyundev.entity.Initsign" >
+        select * from initsign where teachersignId = #{teachersignId}
+    </select>
+    <select id="getsigningbyCourseid" resultType="com.zx.daoyundev.entity.Initsign" >
+        select * from initsign where courseId = #{courseId} and ((sightype = 2 and isEnd = 1) or (sightype = 1 and endtime &gt; #{endtime}))
+    </select>
+    <select id="getsigningCountbyCourseid" resultType="java.lang.Integer" >
+        select count(*) from initsign where courseId = #{courseId} and ((sightype = 2 and isEnd = 1) or (sightype = 1 and endtime &gt; #{endtime}))
+    </select>
+    <select id="judgetimesign" resultType="java.lang.Integer" >
+        select count(*) from initsign where courseId = #{courseId} and ((sightype = 2 and isEnd = 1) or (sightype = 1 and endtime &gt; #{begtime}))
+    </select>
+<!--    <select id="gettimesigningCountbyCourseid" resultType="int" >-->
+<!--        select count(*) from initsign where courseId = #{courseId}-->
+<!--    </select>-->
+<!--    <select id="getkeysigningCountbyCourseid" resultType="int" >-->
+<!--        select count(*) from initsign where courseId = #{courseId}-->
+<!--    </select>-->
+    <insert id="initAnsign" useGeneratedKeys="true" keyProperty="teachersignId">
+        insert into initsign(teacherId, courseId, begtime, endtime, teachlongitude, teachlatitude, sightype, isEnd) values (#{teacherId},#{courseId},#{begtime},#{endtime},#{teachlongitude},#{teachlatitude},#{sightype},#{isEnd})
+    </insert>
+    <update id="updatesigntime" parameterType="com.zx.daoyundev.entity.Initsign">
+        update  initsign
+        set endtime = #{endtime}
+        where teachersignId=#{teachersignId}
+    </update>
+    <update id="endsigh" parameterType="com.zx.daoyundev.entity.Initsign">
+        update  initsign
+        set isEnd = 2
+        where teachersignId=#{teachersignId}
+    </update>
+    <delete id="deletesighbyId" parameterType="int">
+        delete from initsign where teachersignId=#{teachersignId}
+    </delete>
+</mapper>

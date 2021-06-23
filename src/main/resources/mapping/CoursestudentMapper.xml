@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zx.daoyundev.mapper.CoursestudentMapper">
+
+    <select id="getcoursestudentbycourseId" resultType="com.zx.daoyundev.entity.Coursestudent" >
+        select * from coursestudent where courseId = #{courseId} order by totalExp desc
+    </select>
+    <select id="getcoursestudentCountbycourseId" resultType="java.lang.Integer" >
+        select count(*) from coursestudent where courseId = #{courseId}
+    </select>
+    <select id="getcoursestudentbystudentId" resultType="com.zx.daoyundev.entity.Coursestudent" >
+        select * from coursestudent where studentId = #{studentId}
+    </select>
+    <select id="getcoursestudentbystudentIdandcourseId" resultType="com.zx.daoyundev.entity.Coursestudent" >
+        select * from coursestudent where studentId = #{studentId} and courseId = #{courseId}
+    </select>
+    <insert id="addcoursestudent" useGeneratedKeys="false" keyProperty="id">
+        insert into coursestudent(courseId, studentId, studentname, totalExp) values (#{courseId},#{studentId},#{studentname},#{totalExp})
+    </insert>
+    <delete id="deletecoursestudentbyId" parameterType="long">
+        delete from coursestudent where id=#{id}
+    </delete>
+    <select id="testisjoin" resultType="java.lang.Integer">
+        select count(*) from coursestudent where courseId = #{courseId} and studentId = #{studentId}
+    </select>
+    <update id="updatetotalExp" parameterType="com.zx.daoyundev.entity.Coursestudent">
+        update  coursestudent
+        set totalExp = #{totalExp}
+        where courseId=#{courseId} and studentId=#{studentId}
+    </update>
+</mapper>
