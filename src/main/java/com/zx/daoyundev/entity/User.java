@@ -23,7 +23,7 @@ public class User {
   @ApiModelProperty(value = "用户昵称")
   private String nickname;
   @ApiModelProperty(value = "出生年份")
-  private long birthyear;
+  private String birthyear;
   @ApiModelProperty(value = "用户学校")
   private long userschool;
   @ApiModelProperty(value = "用户院系")
@@ -43,7 +43,7 @@ public class User {
             ", sex=" + sex +
             ", role=" + role +
             ", nickname='" + nickname + '\'' +
-            ", birthyear=" + birthyear +
+            ", birthyear='" + birthyear + '\'' +
             ", userschool=" + userschool +
             ", depart=" + depart +
             ", perid=" + perid +
@@ -107,7 +107,7 @@ public class User {
     return nickname;
   }
 
-  public long getBirthyear() {
+  public String getBirthyear() {
     return birthyear;
   }
 
@@ -139,7 +139,7 @@ public class User {
     this.nickname = nickname;
   }
 
-  public void setBirthyear(long birthyear) {
+  public void setBirthyear(String birthyear) {
     this.birthyear = birthyear;
   }
 

@@ -1,16 +1,8 @@
 package com.zx.daoyundev;
 
 
-import com.zx.daoyundev.entity.Initsign;
-import com.zx.daoyundev.mapper.InitsignMapper;
-import com.zx.daoyundev.mapper.StudentsignMapper;
-import com.zx.daoyundev.service.InitsignService;
-import com.zx.daoyundev.util.DistanceUtil;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.List;
 
 
 @SpringBootTest
