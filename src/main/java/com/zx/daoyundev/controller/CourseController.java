@@ -11,6 +11,7 @@ import com.zx.daoyundev.util.ResultCodeEnum;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.ibatis.annotations.Case;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -252,8 +253,9 @@ public class CourseController {
 //    @RequestMapping("/deleteclass/{courseId}")
     @PostMapping("/deleteclass/{courseId}")
     public Result deleteclass(@PathVariable int courseId) {
+        Course course = courseService.getcoursebyId(courseId);
         int i = courseService.deletecoursebyId(courseId);
-        return Result.success().setCode(ResultCodeEnum.OK.getCode()).setMsg("修改班课信息成功！");
+        return Result.success().setCode(ResultCodeEnum.OK.getCode()).setMsg("删除班课成功！");
     }
 
     //    @ApiOperation(value = "根据courseId删除班课")
@@ -282,9 +284,9 @@ public class CourseController {
         coursestudent.setTotalExp(0);
         //System.out.println(course.getCourseId());
         //JSONObject jsonObject =new JSONObject();
-        if (course.getJoinable() == 0) {
+        if (course.getJoinable() == 1) {
             return Result.failure(ResultCodeEnum.BAD_REQUEST).setMsg("班课不允许学生加入！");
-        } else if (course.getCoursestate() == 1) {
+        } else if (course.getCoursestate() == 2) {
             return Result.failure(ResultCodeEnum.BAD_REQUEST).setMsg("该班课已结束！");
         } else if (coursestudentService.testisjoin(coursestudent) != 0) {
             return Result.failure(ResultCodeEnum.BAD_REQUEST).setMsg("已经加入该班课！");

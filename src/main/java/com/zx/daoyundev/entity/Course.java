@@ -17,9 +17,9 @@ public class Course {
   //private long term;
   @ApiModelProperty(value = "创建老师名")
   private String teacherName;
-  @ApiModelProperty(value = "是否允许加入")
+  @ApiModelProperty(value = "是否允许加入,1代表不允许，2代表允许")
   private long joinable;
-  @ApiModelProperty(value = "是否是学校课表班课")
+  @ApiModelProperty(value = "是否是学校课表班课，1代表是，2代表不是")
   private long isschoolclass;
   @ApiModelProperty(value = "学校")
   private long courseschool;
@@ -33,7 +33,7 @@ public class Course {
   private String examarrange;
   @ApiModelProperty(value = "班课图")
   private String image;
-  @ApiModelProperty(value = "结束状态")
+  @ApiModelProperty(value = "结束状态,1代表未结束，2代表已结束")
   private long coursestate;
 
   @Override
