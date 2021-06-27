@@ -180,6 +180,7 @@ public class CourseController {
                 jsonObject.put("studentname", coursestudentList.get(i).getStudentname());
                 jsonObject.put("perid", user.getPerid());
                 jsonObject.put("totalExp", coursestudentList.get(i).getTotalExp());
+                jsonObject.put("avatar",user.getAvatar());
                 jsonArray.add(jsonObject);
             }
             return Result.success().setData(jsonArray).setCode(ResultCodeEnum.OK.getCode()).setMsg("获取加入班课的学生列表成功!");
@@ -342,7 +343,7 @@ public class CourseController {
     @GetMapping("getcoursedetail/{courseId}")
     public Result getcoursedetail(@PathVariable int courseId) {
         Course course = courseService.getcoursebyId(courseId);
-        return Result.success().setData(course).setCode(ResultCodeEnum.OK.getCode()).setMsg("获取加入班课的学生列表成功!");
+        return Result.success().setData(course).setCode(ResultCodeEnum.OK.getCode()).setMsg("获取班课详细信息成功!");
     }
 //    @ApiOperation(value = "根据courseId获取班课详细信息")
 //    @ApiParam(name = "courseId", type = "int")

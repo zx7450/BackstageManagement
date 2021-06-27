@@ -10,6 +10,7 @@ import com.zx.daoyundev.service.UserService;
 import com.zx.daoyundev.util.Result;
 import com.zx.daoyundev.util.ResultCodeEnum;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -220,4 +221,12 @@ public class UserController {
 //        }
 //        return jsonArray;
 //    }
+    @ApiOperation(value = "根据手机号注销用户")
+    @ApiImplicitParam(name = "tel",value = "手机号", paramType = "path",required = true)
+    @PostMapping("/logoutuserById/{tel}")
+    public Result logoutuserById(@PathVariable String tel){
+        userService.deleteuser(tel);
+        return Result.success().setCode(ResultCodeEnum.OK.getCode()).setMsg("注销用户成功！");
+    }
+
 }
