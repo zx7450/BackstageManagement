@@ -105,6 +105,7 @@ public class RoleRightController {
             for (int i = 0; i < role.getRolerights().size(); i++) {
                 if (rightService.geyRightCountByRightId(role.getRolerights().get(i).getRightId())==0)
                     return Result.failure(ResultCodeEnum.CREATE_FAILED).setMsg("未查询到该权限,无法为该角色新增权限");
+                role.getRolerights().get(i).setRoleId(roleId);
                 rightService.addRoleRight(role.getRolerights().get(i));
             }
         }
