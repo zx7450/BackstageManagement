@@ -135,6 +135,7 @@ public class UserController {
         jsonObject.put("depart",user.getDepart());
         jsonObject.put("perid",user.getPerid());
         jsonObject.put("totalexp",totalexp);
+        jsonObject.put("avatar",user.getAvatar());
         return Result.success().setData(jsonObject).setCode(ResultCodeEnum.OK.getCode()).setMsg("获取用户信息成功！");
     }
 //    @ApiOperation(value = "根据电话号码获取用户信息")
@@ -194,6 +195,7 @@ public class UserController {
             jsonObject.put("userschool",userList.get(i).getUserschool());
             jsonObject.put("depart",userList.get(i).getDepart());
             jsonObject.put("perid",userList.get(i).getPerid());
+            jsonObject.put("avatar",userList.get(i).getAvatar());
             jsonArray.add(jsonObject);
         }
         return Result.success().setData(jsonArray).setCode(ResultCodeEnum.OK.getCode()).setMsg("获取所有用户成功！");

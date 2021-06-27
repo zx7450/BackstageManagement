@@ -2,10 +2,12 @@ package com.zx.daoyundev.mapper;
 
 import com.zx.daoyundev.entity.Studentsign;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Mapper
+@Repository
 public interface StudentsignMapper {
     List<Studentsign> geistudentsignById(Studentsign studentsign);
     List<Studentsign> getissignstudentsignById(Studentsign studentsign);
