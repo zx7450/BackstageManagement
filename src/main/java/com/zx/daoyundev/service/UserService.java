@@ -26,4 +26,6 @@ public interface UserService {
     int deleteuser(String tel);
 
     List<User> findAlluser();
+
+    void updatePasswordByTel(User user);
 }

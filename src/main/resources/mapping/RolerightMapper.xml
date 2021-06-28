@@ -13,17 +13,22 @@
     <select id="getRoleRightByRoleId" resultType="com.zx.daoyundev.entity.Roleright">
         select *
         from roleright
-        where rolerightId = #{rolerightId}
+        where roleId = #{roleId}
     </select>
     <select id="getRoleRightByRightId" resultType="com.zx.daoyundev.entity.Roleright">
         select *
         from roleright
         where rightId = #{rightId}
     </select>
-    <delete id="deleteRoleRightById" parameterType="java.lang.Integer">
+    <select id="getRoleRightCountById" resultType="java.lang.Integer">
+        select count(*)
+        from roleright
+        where roleId = #{roleId} and rightId = #{rightId}
+    </select>
+    <delete id="deleteRoleRightById" parameterType="com.zx.daoyundev.entity.Roleright">
         delete
         from roleright
-        where rolerightId = #{rolerightId}
+        where roleId = #{roleId} and rightId = #{rightId}
     </delete>
     <insert id="addRoleRight" useGeneratedKeys="true" keyProperty="rolerightId">
         insert into roleright(roleId, rightId)

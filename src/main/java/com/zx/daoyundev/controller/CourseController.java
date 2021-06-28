@@ -180,7 +180,7 @@ public class CourseController {
                 jsonObject.put("studentname", coursestudentList.get(i).getStudentname());
                 jsonObject.put("perid", user.getPerid());
                 jsonObject.put("totalExp", coursestudentList.get(i).getTotalExp());
-                jsonObject.put("avatar",user.getAvatar());
+                jsonObject.put("avatar", user.getAvatar());
                 jsonArray.add(jsonObject);
             }
             return Result.success().setData(jsonArray).setCode(ResultCodeEnum.OK.getCode()).setMsg("获取加入班课的学生列表成功!");

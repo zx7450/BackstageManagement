@@ -25,8 +25,11 @@ public interface RolerightMapper {
     //根据权限id查看该权限为那些角色所有
     List<Roleright> getRoleRightByRightId(Integer rightId);
 
+    //根据角色id和权限id获取角色权限数目
+    int getRoleRightCountById(Roleright roleright);
+
     //根据角色权限id删除角色权限（删除某角色的某一权限）
-    void deleteRoleRightById(Integer rolerightId);
+    void deleteRoleRightById(Roleright roleright);
 
     //新增角色权限
     Integer addRoleRight(Roleright roleright);

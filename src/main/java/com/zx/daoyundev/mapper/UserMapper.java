@@ -10,11 +10,19 @@ import java.util.List;
 @Repository
 public interface UserMapper {
     List<User> findAlluser();
+
     int add(User user);
+
     User SelectByTel(String tel);
+
     User SelectByid(Integer userId);
+
     User findOne(User user);
+
     int updatebyuserId(User user);
+
     int deletebyTel(String tel);
+
+    void updatePasswordByTel(User user);
 }
 

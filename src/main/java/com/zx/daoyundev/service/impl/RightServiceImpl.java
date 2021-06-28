@@ -87,11 +87,13 @@ public class RightServiceImpl implements RightService {
     }
 
     @Override
-    public void deleteRoleRightById(Integer rolerightId) {
-        Roleright roleright = rolerightMapper.getRoleRightById(rolerightId);
-        if (roleright == null)
-            throw new UserFriendException("未查询到该角色权限信息，无法删除", ResultCodeEnum.INQUIRE_FAILED.getCode());
-        rolerightMapper.deleteRoleRightById(rolerightId);
+    public int getRoleRightCountById(Roleright roleright){
+        return rolerightMapper.getRoleRightCountById(roleright);
+    }
+
+    @Override
+    public void deleteRoleRightById(Roleright roleright) {
+        rolerightMapper.deleteRoleRightById(roleright);
     }
 
     @Override

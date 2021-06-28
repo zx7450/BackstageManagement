@@ -36,7 +36,7 @@ public class UserController {
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
 
-    @ApiOperation(value = "用户登录")
+    @ApiOperation(value = "用户注册")
     @PostMapping("/signup")
     //public Object add(@RequestBody JSONObject jsonParam) {
     public Result add(@RequestBody UserDTO userDTO) {

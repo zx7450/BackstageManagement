@@ -30,6 +30,11 @@
         set userName = #{userName},role = #{role},sex = #{sex},nickname = #{nickname},birthyear = #{birthyear},userschool = #{userschool},depart = #{depart},perid = #{perid},avatar = #{avatar}
         where userId=#{userId}
     </update>
+    <update id="updatePasswordByTel" parameterType="com.zx.daoyundev.entity.User">
+        update  user
+        set userPassward = #{userPassward}
+        where tel=#{tel}
+    </update>
     <delete id="deletebyTel" parameterType="java.lang.String">
         delete from user where tel=#{tel}
     </delete>

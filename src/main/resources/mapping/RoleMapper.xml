@@ -10,6 +10,11 @@
         from role
         where roleId = #{roleId}
     </select>
+    <select id="getRoleCountById" resultType="java.lang.Integer">
+        select count(*)
+        from role
+        where roleId = #{roleId}
+    </select>
     <delete id="deleteRoleById" parameterType="java.lang.Integer">
         delete
         from role

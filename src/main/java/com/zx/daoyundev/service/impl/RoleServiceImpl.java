@@ -34,6 +34,11 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    public int getRoleCountById(Integer roleId){
+        return roleMapper.getRoleCountById(roleId);
+    }
+
+    @Override
     public void deleteRoleById(Integer roleId) {
         Role role = roleMapper.getRoleById(roleId);
         if (role == null)

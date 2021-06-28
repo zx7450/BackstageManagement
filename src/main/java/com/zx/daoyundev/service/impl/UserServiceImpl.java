@@ -19,6 +19,7 @@ public class UserServiceImpl implements UserService {
         this.userMapper = userMapper;
     }
 
+    @Override
     public User add(User user) {
         String passwordHash = passwordToHash(user.getUserPassward());
         user.setUserPassward(passwordHash);
@@ -26,20 +27,24 @@ public class UserServiceImpl implements UserService {
         return findByTel(user.getTel());
     }
 
+    @Override
     public User findById(Integer id) {
         User user = new User();
         user.setUserId(id);
         return userMapper.findOne(user);
     }
 
+    @Override
     public User findByUserid(Integer userId) {
         return userMapper.SelectByid(userId);
     }
 
+    @Override
     public User findByTel(String tel) {
         return userMapper.SelectByTel(tel);
     }
 
+    @Override
     public String passwordToHash(String password) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -61,22 +66,33 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    @Override
     //public boolean comparePassword(User user, User userInDataBase) {
     public boolean comparePassword(String userPassward, User userInDataBase) {
         return passwordToHash(userPassward)      // 将用户提交的密码转换为 hash
                 .equals(userInDataBase.getUserPassward()); // 数据库中的 password 已经是 hash，不用转换
     }
 
+    @Override
     public User updateuser(User user) {
         userMapper.updatebyuserId(user);
         return findByTel(user.getTel());
     }
 
+    @Override
     public int deleteuser(String tel) {
         return userMapper.deletebyTel(tel);
     }
 
+    @Override
     public List<User> findAlluser() {
         return userMapper.findAlluser();
+    }
+
+    @Override
+    public void updatePasswordByTel(User user){
+        String passwordHash = passwordToHash(user.getUserPassward());
+        user.setUserPassward(passwordHash);
+        userMapper.updatePasswordByTel(user);
     }
 }

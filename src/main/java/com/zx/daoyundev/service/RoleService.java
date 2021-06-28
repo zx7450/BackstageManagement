@@ -16,6 +16,9 @@ public interface RoleService {
     //根据角色id获取角色信息
     Role getRoleById(Integer roleId);
 
+    //根据角色id获取角色数
+    int getRoleCountById(Integer roleId);
+
     //根据角色id删除角色，对应的权限也级联删除
     void deleteRoleById(Integer roleId);
 
