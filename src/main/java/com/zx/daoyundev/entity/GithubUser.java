@@ -1,13 +1,18 @@
 package com.zx.daoyundev.entity;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel
 public class GithubUser {
     //private String login;
+    @ApiModelProperty(value = "用户名")
     private String name;
+    @ApiModelProperty(value = "Githubid")
     private Long id;
+    @ApiModelProperty(value = "Githubbio")
     private String bio;
+    @ApiModelProperty(value = "Githubtoken")
     private String token;
 
     public void setToken(String token) {

@@ -266,7 +266,7 @@ public class SendSmsController {
                 return Result.failure(ResultCodeEnum.BAD_REQUEST).setMsg("请先获取验证码在进行校验！");
             }
             else {
-                return Result.failure(ResultCodeEnum.LoginError).setMsg("验证码错误！");
+                return Result.failure(ResultCodeEnum.BAD_REQUEST).setMsg("验证码错误！");
             }
             //return redisCode == null?"请先获取验证码在进行校验！" : "错误";
         }

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.daoyundev.mapper.MenuMapper">
+    <select id="getParentMenuByRoleId" resultType="com.zx.daoyundev.entity.Menu">
+        select m.*
+        from menu m,role_menu
+        where m.menuId = role_menu.menuId and role_menu.roleId = #{roleId} and m.parentId = 0
+    </select>
+    <select id="getAllMenu" resultType="com.zx.daoyundev.entity.Menu">
+        select *
+        from menu
+    </select>
+    <select id="getChildMenuByPid" resultType="com.zx.daoyundev.entity.Menu">
+        select *
+        from menu
+        where parentId = #{parentId}
+    </select>
+    <insert id="addMenu" useGeneratedKeys="true" keyProperty="menuId">
+        insert into menu(parentId, title, name, icon, path, sort, hidden)
+        values (#{parentId}, #{title}, #{name}, #{icon}, #{path}, #{sort}, #{hidden})
+    </insert>
+    <update id="updateMenuById" parameterType="com.zx.daoyundev.entity.Menu">
+        update menu
+        <trim prefix="set" suffixOverrides=",">
+            <if test="title!=null">title = #{title},</if>
+            <if test="name!=null">name = #{name},</if>
+            <if test="icon!=null">icon = #{icon},</if>
+            <if test="path!=null">path = #{path},</if>
+            <if test="sort!=null">sort = #{sort},</if>
+            <if test="hidden!=null">hidden = #{hidden},</if>
+        </trim>
+        where menuId = #{menuId}
+    </update>
+    <delete id="deleteMenuById" parameterType="java.lang.Integer">
+        delete
+        from menu
+        where menuId = #{menuId}
+    </delete>
+    <delete id="deleteMenuByPid" parameterType="java.lang.Integer">
+        delete
+        from menu
+        where parentId = #{parentId}
+    </delete>
+    <insert id="insertRoleMenu" parameterType="com.zx.daoyundev.entity.RoleMenuDTO">
+        INSERT INTO  role_menu(
+        roleId, menuId
+        )VALUES
+        <foreach collection="menuIdList" item="menu" index="index" separator=",">
+            (
+            #{roleId},
+            #{menu}
+            )
+        </foreach>
+    </insert>
+    <delete id="deleteRoleMenuById" parameterType="java.lang.Integer">
+        delete
+        from role_menu
+        where rolemenuId = #{rolemenuId}
+    </delete>
+    <select id="getRoleMenuCountById" resultType="java.lang.Integer">
+        select count(*)
+        from role_menu
+        where rolemenuId = #{rolemenuId}
+    </select>
+</mapper>
