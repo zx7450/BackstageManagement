@@ -24,6 +24,16 @@ public class StudentsignServiceImpl implements StudentsignService {
     }
 
     @Override
+    public int getissignCountstudentsignById(Studentsign studentsign){
+        return studentsignMapper.getissignCountstudentsignById(studentsign);
+    }
+
+    @Override
+    public int getunsignCountstudentsignById(Studentsign studentsign){
+        return studentsignMapper.getunsignCountstudentsignById(studentsign);
+    }
+
+    @Override
     public List<Studentsign> getissign(int teachersignId) {
         return studentsignMapper.getissign(teachersignId);
     }

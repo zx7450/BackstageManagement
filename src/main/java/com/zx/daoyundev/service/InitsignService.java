@@ -11,6 +11,8 @@ import java.util.List;
 public interface InitsignService {
     List<Initsign> gethistory(Initsign initsign);
 
+    int gethistoryCountbyCourseid(Initsign initsign);
+
     Initsign getinitsignbyteachersignId(int teachersignId);
 
     Initsign getsigningbyCourseid(Initsign initsign);

@@ -33,41 +33,7 @@ public class UserController {
 //    public UserController(UserService userService) {
 //        this.userService = userService;
 //    }
-    @Autowired
-    private RedisTemplate<String, String> redisTemplate;
 
-    @ApiOperation(value = "用户注册")
-    @PostMapping("/signup")
-    //public Object add(@RequestBody JSONObject jsonParam) {
-    public Result add(@RequestBody UserDTO userDTO) {
-//        String userName=jsonParam.get("userName").toString();
-//        String userPassward=jsonParam.get("userPassward").toString();
-//        String tel=jsonParam.get("tel").toString();
-//        String code=jsonParam.get("code").toString();
-        // 获取到操作String的对象
-        ValueOperations<String, String> stringR = redisTemplate.opsForValue();
-
-        // 根据手机号进行查询
-        String redisCode = stringR.get(userDTO.getTel());
-        if (userService.findByTel(userDTO.getTel()) != null) {
-            return Result.failure(ResultCodeEnum.RegisterAlreadyExist).setMsg("手机号已被使用！");
-        } else if (userDTO.getCode().equals(redisCode)) {
-            User user=new User();
-            user.setUserName(userDTO.getUserName());
-            user.setUserPassward(userDTO.getUserPassward());
-            user.setTel(userDTO.getTel());
-            User user1;
-            user1 = userService.add(user);
-            return Result.success().setCode(ResultCodeEnum.OK.getCode()).setMsg("注册成功！");
-        } else {
-            if(redisCode==null){
-                return Result.failure(ResultCodeEnum.BAD_REQUEST).setMsg("请先获取验证码在进行校验！");
-            }
-            else {
-                return Result.failure(ResultCodeEnum.LoginError).setMsg("验证码错误！");
-            }
-        }
-    }
 //    @ApiOperation(value = "用户登录")
 //    @PostMapping("/signup")
 //    //public Object add(@RequestBody JSONObject jsonParam) {

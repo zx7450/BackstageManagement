@@ -13,6 +13,10 @@ public interface StudentsignService {
 
     List<Studentsign> getissignstudentsignById(Studentsign studentsign);
 
+    int getissignCountstudentsignById(Studentsign studentsign);
+
+    int getunsignCountstudentsignById(Studentsign studentsign);
+
     List<Studentsign> getissign(int teachersignId);
 
     List<Studentsign> getunsign(int teachersignId);

@@ -4,16 +4,22 @@
 <mapper namespace="com.zx.daoyundev.mapper.DictionaryMapper">
 
     <select id="queryAllDic" resultType="com.zx.daoyundev.entity.Dictionary">
-        select * from dictionary
+        select *
+        from dictionary
     </select>
     <insert id="addDict" useGeneratedKeys="false" keyProperty="dictionaryId">
-        insert into dictionary(dictionaryCode, dictionaryDescribe, pId) values (#{dictionaryCode},#{dictionaryDescribe},#{pId})
+        insert into dictionary(dictionaryCode, dictionaryDescribe, pId)
+        values (#{dictionaryCode}, #{dictionaryDescribe}, #{pId})
     </insert>
     <select id="getcountbypId" resultType="java.lang.Integer">
-        select count(*) from dictionary where pId = #{pId}
+        select count(*)
+        from dictionary
+        where pId = #{pId}
     </select>
     <select id="querybypId" resultType="com.zx.daoyundev.entity.Dictionary">
-        select * from dictionary where pId = #{pId}
+        select *
+        from dictionary
+        where pId = #{pId}
     </select>
 
 </mapper>

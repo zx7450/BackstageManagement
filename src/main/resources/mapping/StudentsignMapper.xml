@@ -9,6 +9,12 @@
     <select id="getissignstudentsignById" resultType="com.zx.daoyundev.entity.Studentsign" >
         select * from studentsign where courseId = #{courseId} and studentId = #{studentId} and signstatus = 2
     </select>
+    <select id="getissignCountstudentsignById" resultType="java.lang.Integer" >
+        select count(*) from studentsign where courseId = #{courseId} and studentId = #{studentId} and signstatus = 2
+    </select>
+    <select id="getunsignCountstudentsignById" resultType="java.lang.Integer" >
+        select count(*) from studentsign where courseId = #{courseId} and studentId = #{studentId} and signstatus = 1
+    </select>
     <select id="getissign" resultType="com.zx.daoyundev.entity.Studentsign" >
         select * from studentsign where teachersignId = #{teachersignId} and signstatus = 2
     </select>
