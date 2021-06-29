@@ -15,7 +15,7 @@ mybatis:
   config-location: classpath:mybatis.xml
   mapper-locations: classpath:mapping/*Mapper.xml
 server:
-  port: 8080
+  port: 8082
 
 http_pool:
   max_total: 200

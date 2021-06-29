@@ -23,6 +23,7 @@ import java.util.concurrent.TimeUnit;
 @Api(tags = "验证码接口")
 @RestController
 @CrossOrigin//跨域支持
+@RequestMapping("/sendSms")
 public class SendSmsController {
     @Autowired
     private SendSmsService sendSmsService;

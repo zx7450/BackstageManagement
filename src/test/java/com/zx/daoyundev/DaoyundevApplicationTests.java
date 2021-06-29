@@ -1,14 +1,19 @@
 package com.zx.daoyundev;
 
 
+import com.zx.daoyundev.entity.Initsign;
+import com.zx.daoyundev.mapper.InitsignMapper;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 
 @SpringBootTest
 class DaoyundevApplicationTests {
-//    @Autowired
-//    InitsignMapper initsignMapper;
+    @Autowired
+    InitsignMapper initsignMapper;
 //    @Autowired
 //    StudentsignMapper studentsignMapper;
 //    @Autowired
@@ -18,6 +23,16 @@ class DaoyundevApplicationTests {
 
     @Test
     void contextLoads() {
+    }
+    @Test
+    void gethistorysign(){
+        Initsign initsign=new Initsign();
+        //initsign.setEndtime(1624943693000);
+        initsign.setCourseId(100004);
+        List<Initsign> initsignList= initsignMapper.gethistorybyCourseid(initsign);
+        for (int i = 0; i < initsignList.size(); i++) {
+            System.out.println(initsignList.get(i));
+        }
     }
 //    @Test
 //    void getdistance(){

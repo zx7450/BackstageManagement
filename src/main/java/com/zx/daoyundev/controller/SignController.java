@@ -10,6 +10,7 @@ import com.zx.daoyundev.util.ResultCodeEnum;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,8 +35,11 @@ public class SignController {
 
     @ApiOperation(value = "获取已结束的签到，按开始时间降序")
 //    @RequestMapping("/historysign")
-    @GetMapping("/historysign")
-    public Result gethistorysign(@RequestBody Initsign initsign){
+    @GetMapping("/historysign/{courseId}/{endtime}")
+    public Result gethistorysign(@PathVariable int courseId,@PathVariable long endtime){
+        Initsign initsign=new Initsign();
+        initsign.setCourseId(courseId);
+        initsign.setEndtime(endtime);
         List<Initsign> initsignList=initsignService.gethistory(initsign);
         JSONArray jsonArray=new JSONArray();
         for (int i = 0; i < initsignList.size(); i++) {

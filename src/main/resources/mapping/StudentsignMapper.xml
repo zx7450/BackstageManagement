@@ -16,10 +16,10 @@
         select * from studentsign where teachersignId = #{teachersignId} and signstatus = 1
     </select>
     <select id="getissigncount" resultType="java.lang.Integer" >
-        select (*) from studentsign where teachersignId = #{teachersignId} and signstatus = 2
+        select count(*) from studentsign where teachersignId = #{teachersignId} and signstatus = 2
     </select>
     <select id="getunsigncount" resultType="java.lang.Integer" >
-        select (*) from studentsign where teachersignId = #{teachersignId} and signstatus = 1
+        select count(*) from studentsign where teachersignId = #{teachersignId} and signstatus = 1
     </select>
     <insert id="addsign" useGeneratedKeys="false" keyProperty="studentsignid">
         insert into studentsign(teachersignId, studentId, courseId, signtype, signstatus) values (#{teachersignId},#{studentId},#{courseId},#{signtype},#{signstatus})
