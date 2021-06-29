@@ -9,6 +9,9 @@
     <select id="getcoursebyTeachername" resultType="com.zx.daoyundev.entity.Course" >
         select * from course where teacherName = #{teacherName}
     </select>
+    <select id="getcoursebyCoursename" resultType="com.zx.daoyundev.entity.Course" >
+        select * from course where courseName = #{courseName}
+    </select>
     <select id="getcoursebyId" resultType="com.zx.daoyundev.entity.Course" >
         select * from course where courseId = #{courseId}
     </select>

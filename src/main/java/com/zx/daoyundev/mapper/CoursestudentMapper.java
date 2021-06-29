@@ -11,11 +11,18 @@ import java.util.List;
 @Repository
 public interface CoursestudentMapper {
     List<Coursestudent> getcoursestudentbycourseId(int courseId);
+
     int getcoursestudentCountbycourseId(int courseId);
+
     List<Coursestudent> getcoursestudentbystudentId(Integer studentId);
+
     Coursestudent getcoursestudentbystudentIdandcourseId(Coursestudent coursestudent);
+
     int addcoursestudent(Coursestudent coursestudent);
+
     int deletecoursestudentbyId(Coursestudent coursestudent);
+
     int testisjoin(Coursestudent coursestudent);
+
     int updatetotalExp(Coursestudent coursestudent);
 }

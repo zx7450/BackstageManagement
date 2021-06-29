@@ -338,7 +338,7 @@ public class CourseController {
     @ApiOperation(value = "根据courseId获取班课详细信息")
     @ApiParam(name = "courseId", type = "int")
 //    @RequestMapping("getcoursedetail/{courseId}")
-    @GetMapping("getcoursedetail/{courseId}")
+    @GetMapping("/getcoursedetail/{courseId}")
     public Result getcoursedetail(@PathVariable int courseId) {
         Course course = courseService.getcoursebyId(courseId);
         return Result.success().setData(course).setCode(ResultCodeEnum.OK.getCode()).setMsg("获取班课详细信息成功!");
@@ -370,12 +370,28 @@ public class CourseController {
     @ApiImplicitParams({@ApiImplicitParam(required = true, name = "courseId", value = "班课id"),
             @ApiImplicitParam(required = true, name = "studentId", value = "学生id")
     })
-    @PostMapping("exitCourse/{courseId}/{studentId}")
-    public Result exitCourse(@PathVariable int courseId,@PathVariable Integer studentId){
-        Coursestudent coursestudent=new Coursestudent();
+    @PostMapping("/exitCourse/{courseId}/{studentId}")
+    public Result exitCourse(@PathVariable int courseId, @PathVariable Integer studentId) {
+        Coursestudent coursestudent = new Coursestudent();
         coursestudent.setCourseId(courseId);
         coursestudent.setStudentId(studentId);
         coursestudentService.deletecoursestudentbyId(coursestudent);
         return Result.success().setCode(ResultCodeEnum.OK.getCode()).setMsg("退出班课成功！");
+    }
+
+    @ApiOperation(value = "根据创建老师获取班课列表")
+    @ApiImplicitParam(required = true, name = "teacherName", value = "教师名")
+    @GetMapping("/findCourseByTeacherName/{teacherName}")
+    public Result findCourseByTeacherName(@PathVariable String teacherName) {
+        List<Course> courseList = courseService.getcoursebyTeachername(teacherName);
+        return Result.success().setData(courseList).setCode(ResultCodeEnum.OK.getCode()).setMsg("根据教师名获取班课列表成功!");
+    }
+
+    @ApiOperation(value = "根据班课名称获取班课列表")
+    @ApiImplicitParam(required = true, name = "courseName", value = "班课名")
+    @GetMapping("/findCourseByCoueseName/{courseName}")
+    public Result findCourseByCoueseName(@PathVariable String courseName) {
+        List<Course> courseList = courseService.getcoursebyCoursename(courseName);
+        return Result.success().setData(courseList).setCode(ResultCodeEnum.OK.getCode()).setMsg("根据班课名获取班课列表成功!");
     }
 }

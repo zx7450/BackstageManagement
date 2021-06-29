@@ -14,6 +14,8 @@ public interface CourseService {
 
     List<Course> getcoursebyTeachername(String teacherName);
 
+    List<Course> getcoursebyCoursename(String courseName);
+
     Course getcoursebyId(int courseId);
 
     int addcourse(Course course);

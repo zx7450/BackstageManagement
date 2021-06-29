@@ -10,10 +10,18 @@ import java.util.List;
 @Repository
 public interface CourseMapper {
     List<Course> findAllcourse();
+
     List<Course> getcoursebyTeachername(String teacherName);
+
+    List<Course> getcoursebyCoursename(String courseName);
+
     Course getcoursebyId(int courseId);
+
     int addcourse(Course course);
+
     int deletecoursebyId(int courseId);
+
     int updatecoursebyId(Course course);
+
     int getcountbyId(int courseId);
 }
