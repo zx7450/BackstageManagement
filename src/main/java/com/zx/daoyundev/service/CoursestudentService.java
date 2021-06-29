@@ -19,7 +19,7 @@ public interface CoursestudentService {
 
     int addcoursestudent(Coursestudent coursestudent);
 
-    int deletecoursestudentbyId(long id);
+    int deletecoursestudentbyId(Coursestudent coursestudent);
 
     int testisjoin(Coursestudent coursestudent);
 

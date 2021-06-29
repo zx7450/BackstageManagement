@@ -15,7 +15,7 @@ public interface CoursestudentMapper {
     List<Coursestudent> getcoursestudentbystudentId(Integer studentId);
     Coursestudent getcoursestudentbystudentIdandcourseId(Coursestudent coursestudent);
     int addcoursestudent(Coursestudent coursestudent);
-    int deletecoursestudentbyId(long id);
+    int deletecoursestudentbyId(Coursestudent coursestudent);
     int testisjoin(Coursestudent coursestudent);
     int updatetotalExp(Coursestudent coursestudent);
 }

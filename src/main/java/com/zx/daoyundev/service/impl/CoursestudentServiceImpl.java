@@ -39,8 +39,8 @@ public class CoursestudentServiceImpl implements CoursestudentService {
     }
 
     @Override
-    public int deletecoursestudentbyId(long id) {
-        return coursestudentMapper.deletecoursestudentbyId(id);
+    public int deletecoursestudentbyId(Coursestudent coursestudent) {
+        return coursestudentMapper.deletecoursestudentbyId(coursestudent);
     }
 
     @Override

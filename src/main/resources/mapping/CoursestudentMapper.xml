@@ -18,8 +18,8 @@
     <insert id="addcoursestudent" useGeneratedKeys="false" keyProperty="id">
         insert into coursestudent(courseId, studentId, studentname, totalExp) values (#{courseId},#{studentId},#{studentname},#{totalExp})
     </insert>
-    <delete id="deletecoursestudentbyId" parameterType="long">
-        delete from coursestudent where id=#{id}
+    <delete id="deletecoursestudentbyId" parameterType="com.zx.daoyundev.entity.Coursestudent">
+        delete from coursestudent where courseId=#{courseId} and studentId=#{studentId}
     </delete>
     <select id="testisjoin" resultType="java.lang.Integer">
         select count(*) from coursestudent where courseId = #{courseId} and studentId = #{studentId}

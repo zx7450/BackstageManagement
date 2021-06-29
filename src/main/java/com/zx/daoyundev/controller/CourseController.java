@@ -8,9 +8,7 @@ import com.zx.daoyundev.service.CoursestudentService;
 import com.zx.daoyundev.service.UserService;
 import com.zx.daoyundev.util.Result;
 import com.zx.daoyundev.util.ResultCodeEnum;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.*;
 import org.apache.ibatis.annotations.Case;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -91,7 +89,7 @@ public class CourseController {
             jsonObject.put("image", course.getImage());
             jsonArray.add(jsonObject);
         }
-        return Result.success().setData(jsonArray).setCode(ResultCodeEnum.OK.getCode()).setMsg("获取创建的班课成功!");
+        return Result.success().setData(jsonArray).setCode(ResultCodeEnum.OK.getCode()).setMsg("获取加入的班课成功!");
     }
 
     //    @ApiOperation(value = "根据userId查找我加入的班课")
@@ -368,4 +366,16 @@ public class CourseController {
 //        return jsonObject;
 //    }
 
+    @ApiOperation(value = "根据班课Id和学生id退出班课")
+    @ApiImplicitParams({@ApiImplicitParam(required = true, name = "courseId", value = "班课id"),
+            @ApiImplicitParam(required = true, name = "studentId", value = "学生id")
+    })
+    @PostMapping("exitCourse/{courseId}/{studentId}")
+    public Result exitCourse(@PathVariable int courseId,@PathVariable Integer studentId){
+        Coursestudent coursestudent=new Coursestudent();
+        coursestudent.setCourseId(courseId);
+        coursestudent.setStudentId(studentId);
+        coursestudentService.deletecoursestudentbyId(coursestudent);
+        return Result.success().setCode(ResultCodeEnum.OK.getCode()).setMsg("退出班课成功！");
+    }
 }
