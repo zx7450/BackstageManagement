@@ -3,6 +3,7 @@ package com.zx.daoyundev.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.zx.daoyundev.entity.User;
 import com.zx.daoyundev.entity.UserDTO;
+import com.zx.daoyundev.security.jwt.JWTUtil;
 import com.zx.daoyundev.service.LoginService;
 import com.zx.daoyundev.service.UserService;
 import com.zx.daoyundev.util.Result;
@@ -12,15 +13,17 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @Api(tags = "用户登录")
 @RestController
 @CrossOrigin//跨域支持
-@RequestMapping("/login")
 public class LoginController {
-    private LoginService loginService;
-    private UserService userService;
+    @Autowired
+    LoginService loginService;
+    @Autowired
+    UserService userService;
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
 
@@ -46,7 +49,10 @@ public class LoginController {
             user.setTel(userDTO.getTel());
             User user1;
             user1 = userService.add(user);
-            return Result.success().setCode(ResultCodeEnum.OK.getCode()).setMsg("注册成功！");
+            String token = JWTUtil.sign(user.getTel(), user.getUserPassward());
+            user1.setUserPassward(null);
+            return Result.success().setToken(token).setData(user1).setCode(ResultCodeEnum.OK.getCode()).setMsg("注册成功！");
+            //return Result.success().setCode(ResultCodeEnum.OK.getCode()).setMsg("注册成功！");
         } else {
             if(redisCode==null){
                 return Result.failure(ResultCodeEnum.BAD_REQUEST).setMsg("请先获取验证码在进行校验！");
@@ -57,23 +63,21 @@ public class LoginController {
         }
     }
 
-    @Autowired
-    public LoginController(LoginService loginService, UserService userService) {
-        this.loginService = loginService;
-        this.userService = userService;
-    }
     @ApiOperation(value = "用户登录接口")
-    @PostMapping("")
+    @PostMapping("/login")
     //public Object login(@RequestBody User user) {
     public Result login(@RequestBody UserDTO userDTO) {
-        User userInDataBase = userService.findByTel(userDTO.getTel());
-        if (userInDataBase == null) {
-            return Result.failure(ResultCodeEnum.LoginError).setMsg("用户不存在！");
-        } else if (!userService.comparePassword(userDTO.getUserPassward(), userInDataBase)) {
-            return Result.failure(ResultCodeEnum.LoginError).setMsg("密码不正确！");
-        } else {
-            String token = loginService.getToken(userInDataBase);
-            return Result.success().setData(token).setCode(ResultCodeEnum.OK.getCode()).setMsg("登录成功!");
+        String tel=userDTO.getTel();
+        String password=userDTO.getUserPassward();
+        User userInDataBase = userService.findByTel(tel);
+        if (userInDataBase != null && userInDataBase.getUserPassward().equals(password)) {
+            System.out.println("登录成功");
+            String token = JWTUtil.sign(tel, password);
+            System.out.println(token);
+            userInDataBase.setUserPassward(null);
+            return Result.success().setToken(token).setData(userInDataBase).setCode(ResultCodeEnum.OK.getCode()).setMsg("登录成功！");
+        }  else {
+            return Result.failure(ResultCodeEnum.LoginError).setMsg("登陆失败！");
         }
     }
 //    @ApiOperation(value = "用户登录接口")
@@ -98,5 +102,10 @@ public class LoginController {
 //        }
 //        return jsonObject;
 //    }
+    @GetMapping("/401")
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public Result unauthorized() {
+    return Result.failure(ResultCodeEnum.ILLEGAL_REQUEST);
+}
 
 }

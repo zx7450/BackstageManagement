@@ -87,7 +87,7 @@ public class Result<T> implements Serializable {
     }
 
     public Result<T> setToken(T token) {
-        this.token = data;
+        this.token = token;
         return this;
     }
     public T getData() {

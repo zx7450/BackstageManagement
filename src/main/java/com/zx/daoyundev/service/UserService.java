@@ -17,9 +17,6 @@ public interface UserService {
 
     User findByTel(String tel);
 
-    String passwordToHash(String password);
-
-    boolean comparePassword(String userPassward, User userInDataBase);
 
     User updateuser(User user);
 

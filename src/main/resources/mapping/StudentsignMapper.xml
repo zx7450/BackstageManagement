@@ -40,7 +40,7 @@
         set getexp = #{getexp}
         where teachersignId=#{teachersignId} and studentId=#{studentId}
     </update>
-<!--    <delete id="deletesignByteachersignId" parameterType="long">-->
-<!--        delete from studentsign where teachersignId=#{teachersignId}-->
-<!--    </delete>-->
+    <!--    <delete id="deletesignByteachersignId" parameterType="long">-->
+    <!--        delete from studentsign where teachersignId=#{teachersignId}-->
+    <!--    </delete>-->
 </mapper>

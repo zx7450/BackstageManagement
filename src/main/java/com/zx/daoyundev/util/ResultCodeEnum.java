@@ -18,6 +18,7 @@ public enum ResultCodeEnum {
     DELETE_FAILED("205","删除失败"),
     BAD_REQUEST("400", "请求参数有误"),
     UNAUTHORIZED("401", "未授权"),
+    ILLEGAL_REQUEST("401","非法请求"),
     FORBIDDEN("403", "被禁止访问"),
     PARAMS_MISS("483", "缺少接口中必填参数"),
     PARAM_ERROR("484", "参数非法"),
@@ -25,7 +26,6 @@ public enum ResultCodeEnum {
     FAILED_USER_ALREADY_EXIST("486", "该用户已存在"),
     INTERNAL_SERVER_ERROR("500", "服务器内部错误"),
     NOT_IMPLEMENTED("501", "业务异常");
-
 
     private String code;
     private String msg;

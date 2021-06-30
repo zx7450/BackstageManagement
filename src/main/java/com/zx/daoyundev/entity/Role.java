@@ -17,8 +17,9 @@ public class Role {
     private String roleName;
     @ApiModelProperty(value = "角色描述")
     private String roleDes;
-    @ApiModelProperty(value = "角色权限列表")
-    private List<Roleright> rolerights;
+    private String perms;
+//    @ApiModelProperty(value = "角色权限列表")
+//    private List<Roleright> rolerights;
 
 
 

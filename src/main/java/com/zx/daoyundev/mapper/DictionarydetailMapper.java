@@ -10,15 +10,10 @@ import java.util.List;
 @Repository
 public interface DictionarydetailMapper {
     int addDictionary(Dictionarydetail dictionarydetail);
-
     List<Dictionarydetail> SelectByCode(String dictionaryCode);
-
     List<Dictionarydetail> SelectById(long dictionaryId);
-
     List<Dictionarydetail> getchild(long detailpId);
-
     int deleteByDetailid(long dictionaryDetailId);
-
     //int updateByDetailid(Dictionarydetail dictionarydetail);
     int updateByDetailid(Dictionarydetail dictionarydetail);
 }

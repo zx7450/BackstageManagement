@@ -15,7 +15,7 @@ mybatis:
   config-location: classpath:mybatis.xml
   mapper-locations: classpath:mapping/*Mapper.xml
 server:
-  port: 8082
+  port: 8080
 
 http_pool:
   max_total: 200
@@ -25,3 +25,10 @@ http_pool:
   socket_timeout: 65000
   validate_after_inactivity: 2000
 
+#showSql
+logging:
+  level:
+    com:
+      example:
+        medicalservice:
+          mapper : debug
