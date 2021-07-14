@@ -6,6 +6,7 @@ import com.aliyuncs.utils.StringUtils;
 import com.zx.daoyundev.entity.SendSms;
 import com.zx.daoyundev.entity.User;
 import com.zx.daoyundev.entity.UserDTO;
+import com.zx.daoyundev.security.jwt.JWTUtil;
 import com.zx.daoyundev.service.SendSmsService;
 import com.zx.daoyundev.service.UserService;
 import com.zx.daoyundev.util.Result;
@@ -230,7 +231,12 @@ public class SendSmsController {
         //String redisCode = stringR.get(tel);
         String redisCode = stringR.get(sendSms.getTel());
         if (sendSms.getCode().equals(redisCode)) {
-            return Result.success().setCode(ResultCodeEnum.OK.getCode()).setMsg("登陆成功！");
+            String token = JWTUtil.sign(userInDataBase.getTel(),userInDataBase.getUserPassward());
+            //System.out.println(token);
+            userInDataBase.setUserPassward(null);
+            //return Result.success().setCode(ResultCodeEnum.OK.getCode()).setMsg("登陆成功！");
+            //userInDataBase.setUserPassward(null);
+            return Result.success().setToken(token).setData(userInDataBase).setCode(ResultCodeEnum.OK.getCode()).setMsg("登录成功！");
             //return "成功";
         } else {
             if(redisCode==null){

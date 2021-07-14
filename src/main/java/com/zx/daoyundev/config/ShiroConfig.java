@@ -65,6 +65,7 @@ public class  ShiroConfig {
         filterRuleMap.put("/login", "anon");
         filterRuleMap.put("/signup", "anon");
         filterRuleMap.put("/sendSms/**", "anon");
+        filterRuleMap.put("/sendSms/**/**", "anon");
         factoryBean.setFilterChainDefinitionMap(filterRuleMap);
         return factoryBean;
     }

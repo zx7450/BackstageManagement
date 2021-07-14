@@ -20,6 +20,16 @@ import java.io.IOException;
  * @author zx
  * @date 2021/6/29 17:21
  */
+//1.用户登陆之后，使用密码对账号进行签名生成并返回token并设置过期时间；
+//
+//        2.将token保存到本地，并且每次发送请求时都在header上携带token。
+//
+//        3.shiro过滤器拦截到请求并获取header中的token，并提交到自定义realm的doGetAuthenticationInfo方法。
+//
+//        4.通过jwt解码获取token中的用户名，从数据库中查询到密码之后根据密码生成jwt效验器并对token进行验证。
+//
+//        通俗点来说，就是服务器根据给定的密钥和算法，对用户名或者ID之类（只要是能判断是某一个用户的唯一标识都行）加上过期时间的时间戳进行加密，然后生成类似XXX.XXX.XXX的字符串，
+//        这个字符串就是所谓的token，以后要想访问服务器得到资源，只需要在请求头带上token，服务器拿到这个token，再进行解密验证操作，判断该用户是否是有效用户，然后放行。
 public class JWTFilter extends BasicHttpAuthenticationFilter {
 
     private Logger LOGGER = LoggerFactory.getLogger(this.getClass());

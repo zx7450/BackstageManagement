@@ -73,7 +73,7 @@ public class LoginController {
         if (userInDataBase != null && userInDataBase.getUserPassward().equals(password)) {
             System.out.println("登录成功");
             String token = JWTUtil.sign(tel, password);
-            System.out.println(token);
+            //System.out.println(token);
             userInDataBase.setUserPassward(null);
             return Result.success().setToken(token).setData(userInDataBase).setCode(ResultCodeEnum.OK.getCode()).setMsg("登录成功！");
         }  else {
