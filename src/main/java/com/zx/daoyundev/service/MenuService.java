@@ -16,6 +16,12 @@ public interface MenuService {
     //获取所有菜单
     List<Menu> getAllMenu();
 
+    //根据父id获取某菜单的子菜单
+    List<Menu> getChildMenuByPid(Integer parentId);
+
+    //根据父id和角色获取某菜单的子菜单
+    List<Menu> getChildMenuByPidAndRoleId(Integer parentId, Integer roleId);
+
     //新增菜单
     Integer addMenu(Menu menu);
 
@@ -28,8 +34,8 @@ public interface MenuService {
     //根据角色id批量新增菜单
     void insertRoleMenu(RoleMenuDTO roleMenuDTO);
 
-    //根据角色菜单id删除角色菜单
-    void deleteRoleMenuById(Integer rolemenuId);
+    //根据角色id和菜单id批量删除角色菜单
+    void deleteRoleMenuById(RoleMenuDTO roleMenuDTO);
 
     //根据角色菜单id获取角色菜单数目
     int getRoleMenuCountById(Integer rolemenuId);

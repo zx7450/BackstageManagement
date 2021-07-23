@@ -79,17 +79,20 @@ public class MenuController {
     public Result addRoleMenu(@RequestBody RoleMenuDTO roleMenuDTO) {
         if (roleService.getRoleCountById(roleMenuDTO.getRoleId()) == 0)
             return Result.failure(ResultCodeEnum.CREATE_FAILED).setMsg("未查询到该角色，无法新增菜单");
+        else if (roleMenuDTO.getMenuIdList().size() == 0)
+            return Result.failure(ResultCodeEnum.PARAM_ERROR).setMsg("数组为空，无法新增菜单");
         menuService.insertRoleMenu(roleMenuDTO);
         return Result.success().setCode(ResultCodeEnum.OK.getCode()).setMsg("为该角色新增菜单成功！");
     }
 
     @ApiOperation(value = "根据角色菜单id删除该角色的某一菜单")
-    @ApiImplicitParam(name = "rolemenuId", value = "角色菜单Id", paramType = "path", required = true)
-    @PostMapping("/deleteRoleMenu/{rolemenuId}")
-    public Result deleteRoleMenu(@PathVariable Integer rolemenuId) {
-        if (menuService.getRoleMenuCountById(rolemenuId) == 0)
-            return Result.failure(ResultCodeEnum.PARAM_ERROR).setMsg("未查询到该角色菜单信息，无法删除菜单");
-        menuService.deleteRoleMenuById(rolemenuId);
+    @PostMapping("/deleteRoleMenu")
+    public Result deleteRoleMenu(@RequestBody RoleMenuDTO roleMenuDTO) {
+        if (roleService.getRoleCountById(roleMenuDTO.getRoleId()) == 0)
+            return Result.failure(ResultCodeEnum.DELETE_FAILED).setMsg("未查询到该角色，无法删除菜单");
+        else if (roleMenuDTO.getMenuIdList().size() == 0)
+            return Result.failure(ResultCodeEnum.PARAM_ERROR).setMsg("数组为空，无法删除菜单");
+        menuService.deleteRoleMenuById(roleMenuDTO);
         return Result.success().setCode(ResultCodeEnum.OK.getCode()).setMsg("为该角色删除菜单成功！");
     }
 }

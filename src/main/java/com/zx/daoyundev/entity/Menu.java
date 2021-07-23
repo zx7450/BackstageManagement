@@ -30,5 +30,6 @@ public class Menu {
   private java.sql.Timestamp createTime;
   @ApiModelProperty(value = "子菜单数组")
   private List<Menu> childmenus;
-
+  @ApiModelProperty(value = "菜单类型")
+  private Integer menutype;
 }

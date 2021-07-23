@@ -9,15 +9,31 @@
     <select id="getAllMenu" resultType="com.zx.daoyundev.entity.Menu">
         select *
         from menu
+        where parentId = 0
     </select>
     <select id="getChildMenuByPid" resultType="com.zx.daoyundev.entity.Menu">
         select *
         from menu
         where parentId = #{parentId}
     </select>
+    <select id="getChildMenuByPidAndRoleId" resultType="com.zx.daoyundev.entity.Menu">
+        select m.*
+        from menu m,role_menu
+        where m.menuId = role_menu.menuId and parentId = #{parentId} and role_menu.roleId = #{roleId}
+    </select>
+    <select id="getChildMenuCountByPidAndRoleId" resultType="java.lang.Integer">
+        select count(*)
+        from menu m,role_menu
+        where m.menuId = role_menu.menuId and parentId = #{parentId} and role_menu.roleId = #{roleId}
+    </select>
+    <select id="getChildMenuCountByPid" resultType="java.lang.Integer">
+        select count(*)
+        from menu
+        where parentId = #{parentId}
+    </select>
     <insert id="addMenu" useGeneratedKeys="true" keyProperty="menuId">
-        insert into menu(parentId, title, name, icon, path, sort, hidden)
-        values (#{parentId}, #{title}, #{name}, #{icon}, #{path}, #{sort}, #{hidden})
+        insert into menu(parentId, title, name, icon, path, sort, hidden, menutype)
+        values (#{parentId}, #{title}, #{name}, #{icon}, #{path}, #{sort}, #{hidden}, #{menutype})
     </insert>
     <update id="updateMenuById" parameterType="com.zx.daoyundev.entity.Menu">
         update menu
@@ -28,6 +44,7 @@
             <if test="path!=null">path = #{path},</if>
             <if test="sort!=null">sort = #{sort},</if>
             <if test="hidden!=null">hidden = #{hidden},</if>
+            <if test="menutype!=0">menutype = #{menutype},</if>
         </trim>
         where menuId = #{menuId}
     </update>
@@ -55,7 +72,7 @@
     <delete id="deleteRoleMenuById" parameterType="java.lang.Integer">
         delete
         from role_menu
-        where rolemenuId = #{rolemenuId}
+        where roleId = #{roleId} and menuId = #{menuId}
     </delete>
     <select id="getRoleMenuCountById" resultType="java.lang.Integer">
         select count(*)

@@ -22,15 +22,40 @@ public class MenuServiceImpl implements MenuService {
     public List<Menu> getMenuWithChildByRoleId(Integer roleId) {
         List<Menu> menuList = menuMapper.getParentMenuByRoleId(roleId);
         for (int i = 0; i < menuList.size(); i++) {
-            List<Menu> childMenu = menuMapper.getChildMenuByPid(menuList.get(i).getMenuId());
+            List<Menu> childMenu = this.getChildMenuByPidAndRoleId(menuList.get(i).getMenuId(), roleId);
             menuList.get(i).setChildmenus(childMenu);
         }
         return menuList;
     }
 
     @Override
+    public List<Menu> getChildMenuByPidAndRoleId(Integer parentId, Integer roleId) {
+        List<Menu> menuList = menuMapper.getChildMenuByPidAndRoleId(parentId, roleId);
+        for (int i = 0; i < menuList.size(); i++) {
+            if (menuMapper.getChildMenuCountByPidAndRoleId(menuList.get(i).getMenuId(), roleId) != 0)
+                menuList.get(i).setChildmenus(this.getChildMenuByPidAndRoleId(menuList.get(i).getMenuId(), roleId));
+        }
+        return menuList;
+    }
+
+    @Override
     public List<Menu> getAllMenu() {
-        return menuMapper.getAllMenu();
+        List<Menu> menuList = menuMapper.getAllMenu();
+        for (int i = 0; i < menuList.size(); i++) {
+            List<Menu> childMenu = this.getChildMenuByPid(menuList.get(i).getMenuId());
+            menuList.get(i).setChildmenus(childMenu);
+        }
+        return menuList;
+    }
+
+    @Override
+    public List<Menu> getChildMenuByPid(Integer parentId) {
+        List<Menu> menuList = menuMapper.getChildMenuByPid(parentId);
+        for (int i = 0; i < menuList.size(); i++) {
+            if (menuMapper.getChildMenuCountByPid(menuList.get(i).getMenuId()) != 0)
+                menuList.get(i).setChildmenus(this.getChildMenuByPid(menuList.get(i).getMenuId()));
+        }
+        return menuList;
     }
 
     @Override
@@ -51,13 +76,16 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
+
     public void insertRoleMenu(RoleMenuDTO roleMenuDTO) {
         menuMapper.insertRoleMenu(roleMenuDTO);
     }
 
     @Override
-    public void deleteRoleMenuById(Integer rolemenuId) {
-        menuMapper.deleteRoleMenuById(rolemenuId);
+    public void deleteRoleMenuById(RoleMenuDTO roleMenuDTO) {
+        for (int i = 0; i < roleMenuDTO.getMenuIdList().size(); i++) {
+            menuMapper.deleteRoleMenuById(roleMenuDTO.getRoleId(), roleMenuDTO.getMenuIdList().get(i));
+        }
     }
 
     @Override

@@ -11,7 +11,10 @@ import java.util.List;
 public interface DictionaryMapper {
 
     List<Dictionary> queryAllDic();
+
     int addDict(Dictionary dictionary);
+
     int getcountbypId(long pId);
+
     List<Dictionary> querybypId(long pId);
 }

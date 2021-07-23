@@ -23,11 +23,12 @@
     <update id="updateRole" parameterType="com.zx.daoyundev.entity.Role">
         update role
         set roleName = #{roleName},
-            roleDes  = #{roleDes}
+            roleDes  = #{roleDes},
+            perms = #{perms}
         where roleId = #{roleId}
     </update>
     <insert id="addRole" useGeneratedKeys="true" keyProperty="roleId">
-        insert into role(roleName, roleDes)
-        values (#{roleName}, #{roleDes})
+        insert into role(roleName, roleDes, perms)
+        values (#{roleName}, #{roleDes}, #{perms})
     </insert>
 </mapper>

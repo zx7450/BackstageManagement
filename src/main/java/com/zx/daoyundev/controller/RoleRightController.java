@@ -69,19 +69,21 @@ public class RoleRightController {
         return Result.success().setCode(ResultCodeEnum.DELETED.getCode());
     }
 
-    //    @ApiOperation(value = "修改角色信息")
-//    @PostMapping("/updateRoleById")
-//    public Result updateRoleById(@RequestBody Role role){
-//        if (role.getRoleId() == null)
-//            return Result.failure(ResultCodeEnum.UPDATE_FAILED).setMsg(("角色id不能为空"));
-//        else if (role.getRoleName() == null)
-//            return Result.failure(ResultCodeEnum.UPDATE_FAILED).setMsg(("角色名称不能为空"));
-//        try {
-//            roleService.getRoleById(role.getRoleId());
-//        } catch (UserFriendException u){
-//            return Result.failure(ResultCodeEnum.UPDATE_FAILED).setMsg("未查询到该角色,无法修改");
-//        }
-//        roleService.updateRole(role);
+    @ApiOperation(value = "修改角色信息（包括权限）")
+    @PostMapping("/updateRoleById")
+    public Result updateRoleById(@RequestBody Role role) {
+        if (role.getRoleId() == null)
+            return Result.failure(ResultCodeEnum.UPDATE_FAILED).setMsg(("角色id不能为空"));
+        else if (role.getRoleName() == null)
+            return Result.failure(ResultCodeEnum.UPDATE_FAILED).setMsg(("角色名称不能为空"));
+        try {
+            roleService.getRoleById(role.getRoleId());
+        } catch (UserFriendException u) {
+            return Result.failure(ResultCodeEnum.UPDATE_FAILED).setMsg("未查询到该角色,无法修改");
+        }
+        roleService.updateRole(role);
+        return Result.success().setCode(ResultCodeEnum.UPDATED.getCode()).setMsg("修改角色信息成功");
+    }
 //        for (int i = 0; i < role.getRolerights().size(); i++) {
 //            if (role.getRolerights().get(i).getUpdateflag()==0)
 //                continue;
