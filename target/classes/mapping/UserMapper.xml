@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zx.daoyundev.mapper.UserMapper">
-    <select id="findAlluser" resultType="com.zx.daoyundev.entity.User" >
-        select * from user
+    <select id="findAlluser" resultType="com.zx.daoyundev.entity.User">
+        select *
+        from user
     </select>
     <insert id="add" useGeneratedKeys="false" keyProperty="id">
-        insert into user(userName, userPassward, tel) values (#{userName},#{userPassward},#{tel})
+        insert into user(userName, userPassward, tel)
+        values (#{userName}, #{userPassward}, #{tel})
     </insert>
-    <select id="SelectByTel" resultType="com.zx.daoyundev.entity.User" >
-        select * from user where tel = #{tel}
+    <select id="SelectByTel" resultType="com.zx.daoyundev.entity.User">
+        select *
+        from user
+        where tel = #{tel}
     </select>
-    <select id="SelectByid" resultType="com.zx.daoyundev.entity.User" >
-        select * from user where userId = #{userId}
+    <select id="SelectByid" resultType="com.zx.daoyundev.entity.User">
+        select *
+        from user
+        where userId = #{userId}
     </select>
     <select id="findOne" resultType="com.zx.daoyundev.entity.User">
         select * from user
@@ -26,17 +32,27 @@
         </where>
     </select>
     <update id="updatebyuserId" parameterType="com.zx.daoyundev.entity.User">
-        update  user
-        set userName = #{userName},role = #{role},sex = #{sex},nickname = #{nickname},birthyear = #{birthyear},userschool = #{userschool},depart = #{depart},perid = #{perid},avatar = #{avatar}
-        where userId=#{userId}
+        update user
+        set userName   = #{userName},
+            role       = #{role},
+            sex        = #{sex},
+            nickname   = #{nickname},
+            birthyear  = #{birthyear},
+            userschool = #{userschool},
+            depart     = #{depart},
+            perid      = #{perid},
+            avatar     = #{avatar}
+        where userId = #{userId}
     </update>
     <update id="updatePasswordByTel" parameterType="com.zx.daoyundev.entity.User">
-        update  user
+        update user
         set userPassward = #{userPassward}
-        where tel=#{tel}
+        where tel = #{tel}
     </update>
     <delete id="deletebyTel" parameterType="java.lang.String">
-        delete from user where tel=#{tel}
+        delete
+        from user
+        where tel = #{tel}
     </delete>
 
 </mapper>

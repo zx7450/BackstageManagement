@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zx.daoyundev.mapper.GithubUserMapper">
     <insert id="InsertUser" useGeneratedKeys="false" keyProperty="id">
-        insert into githubuser(name, bio, token) values (#{name},#{bio},#{token})
+        insert into githubuser(name, bio, token)
+        values (#{name}, #{bio}, #{token})
     </insert>
 </mapper>

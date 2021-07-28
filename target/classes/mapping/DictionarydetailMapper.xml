@@ -4,28 +4,40 @@
 <mapper namespace="com.zx.daoyundev.mapper.DictionarydetailMapper">
 
     <insert id="addDictionary" useGeneratedKeys="false" keyProperty="dictionaryDetailId">
-        insert into dictionarydetail(dictionaryId, dictionaryCode, itemKey, itemValue, isdefault, detailpId) values (#{dictionaryId},#{dictionaryCode},#{itemKey},#{itemValue},#{isdefault},#{detailpId})
+        insert into dictionarydetail(dictionaryId, dictionaryCode, itemKey, itemValue, isdefault, detailpId)
+        values (#{dictionaryId}, #{dictionaryCode}, #{itemKey}, #{itemValue}, #{isdefault}, #{detailpId})
     </insert>
-    <select id="SelectByCode" resultType="com.zx.daoyundev.entity.Dictionarydetail" >
-        select * from dictionarydetail where dictionaryCode = #{dictionaryCode} order by isdefault desc
+    <select id="SelectByCode" resultType="com.zx.daoyundev.entity.Dictionarydetail">
+        select *
+        from dictionarydetail
+        where dictionaryCode = #{dictionaryCode}
+        order by isdefault desc
     </select>
-    <select id="SelectById" resultType="com.zx.daoyundev.entity.Dictionarydetail" >
-        select * from dictionarydetail where dictionaryId = #{dictionaryId} order by isdefault desc
+    <select id="SelectById" resultType="com.zx.daoyundev.entity.Dictionarydetail">
+        select *
+        from dictionarydetail
+        where dictionaryId = #{dictionaryId}
+        order by isdefault desc
     </select>
-    <select id="getchild" resultType="com.zx.daoyundev.entity.Dictionarydetail" >
-        select * from dictionarydetail where detailpId = #{detailpId} order by isdefault desc
+    <select id="getchild" resultType="com.zx.daoyundev.entity.Dictionarydetail">
+        select *
+        from dictionarydetail
+        where detailpId = #{detailpId}
+        order by isdefault desc
     </select>
     <delete id="deleteByDetailid" parameterType="long">
-        delete from dictionarydetail where dictionaryDetailId=#{dictionaryDetailId}
+        delete
+        from dictionarydetail
+        where dictionaryDetailId = #{dictionaryDetailId}
     </delete>
     <update id="updateByDetailid" parameterType="com.zx.daoyundev.entity.Dictionarydetail">
-        update  dictionarydetail
+        update dictionarydetail
         set itemKey = #{itemKey},itemValue = #{itemValue},isdefault = #{isdefault}
-<!--        <set>-->
-<!--            <if test="itemKey!=null and itemKey!=''">itemKey=#{itemKey},</if>-->
-<!--            <if test="itemValue!=null and itemValue!=''">itemValue=#{itemValue},</if>-->
-<!--            <if test="isdefault!=null and isdefault!=''">isdefault=#{isdefault}</if>-->
-<!--        </set>-->
+        <!--        <set>-->
+        <!--            <if test="itemKey!=null and itemKey!=''">itemKey=#{itemKey},</if>-->
+        <!--            <if test="itemValue!=null and itemValue!=''">itemValue=#{itemValue},</if>-->
+        <!--            <if test="isdefault!=null and isdefault!=''">isdefault=#{isdefault}</if>-->
+        <!--        </set>-->
         where dictionaryDetailId=#{dictionaryDetailId}
     </update>
 </mapper>
