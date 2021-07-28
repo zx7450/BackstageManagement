@@ -3,30 +3,55 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zx.daoyundev.mapper.CourseMapper">
 
-    <select id="findAllcourse" resultType="com.zx.daoyundev.entity.Course" >
-        select * from course
+    <select id="findAllcourse" resultType="com.zx.daoyundev.entity.Course">
+        select *
+        from course
     </select>
-    <select id="getcoursebyTeachername" resultType="com.zx.daoyundev.entity.Course" >
-        select * from course where teacherName = #{teacherName}
+    <select id="getcoursebyTeachername" resultType="com.zx.daoyundev.entity.Course">
+        select *
+        from course
+        where teacherName = #{teacherName}
     </select>
-    <select id="getcoursebyCoursename" resultType="com.zx.daoyundev.entity.Course" >
-        select * from course where courseName = #{courseName}
+    <select id="getcoursebyCoursename" resultType="com.zx.daoyundev.entity.Course">
+        select *
+        from course
+        where courseName = #{courseName}
     </select>
-    <select id="getcoursebyId" resultType="com.zx.daoyundev.entity.Course" >
-        select * from course where courseId = #{courseId}
+    <select id="getcoursebyId" resultType="com.zx.daoyundev.entity.Course">
+        select *
+        from course
+        where courseId = #{courseId}
     </select>
     <insert id="addcourse" useGeneratedKeys="true" keyProperty="courseId">
-        insert into course(courseName, courseclass, term, teacherName, joinable, isschoolclass, courseschool, coursemajor, learningrequire, teachprogess, examarrange, image, coursestate) values (#{courseName},#{courseclass},#{term},#{teacherName},#{joinable},#{isschoolclass},#{courseschool},#{coursemajor},#{learningrequire},#{teachprogess},#{examarrange},#{image},#{coursestate})
+        insert into course(courseName, courseclass, term, teacherName, joinable, isschoolclass, courseschool,
+                           coursemajor, learningrequire, teachprogess, examarrange, image, coursestate)
+        values (#{courseName}, #{courseclass}, #{term}, #{teacherName}, #{joinable}, #{isschoolclass}, #{courseschool},
+                #{coursemajor}, #{learningrequire}, #{teachprogess}, #{examarrange}, #{image}, #{coursestate})
     </insert>
     <delete id="deletecoursebyId" parameterType="int">
-        delete from course where courseId=#{courseId}
+        delete
+        from course
+        where courseId = #{courseId}
     </delete>
     <update id="updatecoursebyId" parameterType="com.zx.daoyundev.entity.Course">
-        update  course
-        set courseName = #{courseName},courseclass = #{courseclass},term = #{term},teacherName = #{teacherName},joinable = #{joinable},isschoolclass = #{isschoolclass},courseschool = #{courseschool},coursemajor = #{coursemajor},learningrequire = #{learningrequire},teachprogess = #{teachprogess},examarrange = #{examarrange},coursestate = #{coursestate}
-        where courseId=#{courseId}
+        update course
+        set courseName      = #{courseName},
+            courseclass     = #{courseclass},
+            term            = #{term},
+            teacherName     = #{teacherName},
+            joinable        = #{joinable},
+            isschoolclass   = #{isschoolclass},
+            courseschool    = #{courseschool},
+            coursemajor     = #{coursemajor},
+            learningrequire = #{learningrequire},
+            teachprogess    = #{teachprogess},
+            examarrange     = #{examarrange},
+            coursestate     = #{coursestate}
+        where courseId = #{courseId}
     </update>
     <select id="getcountbyId" resultType="java.lang.Integer">
-        select count(*) from course where courseId = #{courseId}
+        select count(*)
+        from course
+        where courseId = #{courseId}
     </select>
 </mapper>

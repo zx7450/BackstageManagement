@@ -27,4 +27,7 @@ public interface RoleService {
 
     //新增角色
     Integer addRole(Role role);
+
+    //根据角色名称获取角色
+    Role getRoleByName(String roleName);
 }

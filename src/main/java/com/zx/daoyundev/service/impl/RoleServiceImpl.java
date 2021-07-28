@@ -34,7 +34,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public int getRoleCountById(Integer roleId){
+    public int getRoleCountById(Integer roleId) {
         return roleMapper.getRoleCountById(roleId);
     }
 
@@ -48,12 +48,17 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public void updateRole(Role role) {
-            roleMapper.updateRole(role);
+        roleMapper.updateRole(role);
     }
 
     @Override
     public Integer addRole(Role role) {
         roleMapper.addRole(role);
         return role.getRoleId();
+    }
+
+    @Override
+    public Role getRoleByName(String roleName) {
+        return roleMapper.getRoleByName(roleName);
     }
 }

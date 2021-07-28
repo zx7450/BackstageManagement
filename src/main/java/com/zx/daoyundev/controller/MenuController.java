@@ -10,6 +10,7 @@ import com.zx.daoyundev.util.ResultCodeEnum;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +31,7 @@ public class MenuController {
     RoleService roleService;
 
     @ApiOperation(value = "获取所有菜单")
+    @RequiresRoles("admin")
     @GetMapping("/getAllMenu")
     public Result getAllMenu() {
         List<Menu> menuList = menuService.getAllMenu();
@@ -45,6 +47,7 @@ public class MenuController {
     }
 
     @ApiOperation(value = "新增菜单")
+    @RequiresRoles("admin")
     @PostMapping("/addMenu")
     public Result addMenu(@RequestBody Menu menu) {
         if (menu.getTitle() == null)
@@ -60,6 +63,7 @@ public class MenuController {
     }
 
     @ApiOperation(value = "修改菜单")
+    @RequiresRoles("admin")
     @PostMapping("/updateMenu")
     public Result updateMenu(@RequestBody Menu menu) {
         menuService.updateMenuById(menu);
@@ -68,6 +72,7 @@ public class MenuController {
 
     @ApiOperation(value = "根据菜单id删除菜单（包括子菜单）")
     @ApiImplicitParam(name = "menuId", value = "菜单Id", paramType = "path", required = true)
+    @RequiresRoles("admin")
     @PostMapping("/deleteMenu/{menuId}")
     public Result deleteMenu(@PathVariable Integer menuId) {
         menuService.deleteMenuWithChildById(menuId);
@@ -75,6 +80,7 @@ public class MenuController {
     }
 
     @ApiOperation(value = "根据角色id批量新增菜单")
+    @RequiresRoles("admin")
     @PostMapping("/addRoleMenu")
     public Result addRoleMenu(@RequestBody RoleMenuDTO roleMenuDTO) {
         if (roleService.getRoleCountById(roleMenuDTO.getRoleId()) == 0)
@@ -86,6 +92,7 @@ public class MenuController {
     }
 
     @ApiOperation(value = "根据角色菜单id删除该角色的某一菜单")
+    @RequiresRoles("admin")
     @PostMapping("/deleteRoleMenu")
     public Result deleteRoleMenu(@RequestBody RoleMenuDTO roleMenuDTO) {
         if (roleService.getRoleCountById(roleMenuDTO.getRoleId()) == 0)

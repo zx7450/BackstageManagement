@@ -31,4 +31,9 @@
         insert into role(roleName, roleDes, perms)
         values (#{roleName}, #{roleDes}, #{perms})
     </insert>
+    <select id="getRoleByName" resultType="com.zx.daoyundev.entity.Role">
+        select *
+        from role
+        where roleName = #{roleName}
+    </select>
 </mapper>

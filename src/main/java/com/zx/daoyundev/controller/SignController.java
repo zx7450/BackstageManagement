@@ -84,10 +84,6 @@ public class SignController {
     @ApiOperation(value = "修改签到结束时间")
     @PostMapping("/updateendtime")
     public Result updateendtime(@RequestBody Initsign initsign) {
-//        Initsign initsign1=initsignService.getinitsignbyteachersignId(initsign.getTeachersignId());
-//        System.out.println("修改的签到号"+initsign.getTeachersignId());
-//        System.out.println("修改前的时间"+initsign1.getEndtime());
-//        System.out.println("申请修改的时间"+initsign.getEndtime());
         int i = initsignService.updatesigntime(initsign);
         return Result.success().setCode(ResultCodeEnum.OK.getCode()).setMsg("修改结束时间成功！");
     }
@@ -159,11 +155,11 @@ public class SignController {
     public Result endsign(@RequestBody Initsign initsign) {
 
         if (initsign.getSightype() == 1) {//结束限时签到，则修改结束时间
-            System.out.println("原结束时间" + initsignService.getinitsignbyteachersignId(initsign.getTeachersignId()).getEndtime());
-            System.out.println("申请修改的时间" + initsign.getEndtime());
+            //System.out.println("原结束时间" + initsignService.getinitsignbyteachersignId(initsign.getTeachersignId()).getEndtime());
+            //System.out.println("申请修改的时间" + initsign.getEndtime());
             int i = initsignService.updatesigntime(initsign);
 
-            System.out.println("修改时间成功");
+            //System.out.println("修改时间成功");
         } else {
             int i = initsignService.endsigh(initsign);
         }
@@ -257,27 +253,27 @@ public class SignController {
             @ApiImplicitParam(required = true, name = "endtime", value = "结束时间（当前时间的时间戳）")
     })
     @GetMapping("/statistSignData/{courseId}/{endtime}")
-    public Result findCourseByCoueseName(@PathVariable int courseId,@PathVariable long endtime) {
-        JSONArray jsonArray =new JSONArray();
-        Initsign initsign=new Initsign();
+    public Result findCourseByCoueseName(@PathVariable int courseId, @PathVariable long endtime) {
+        JSONArray jsonArray = new JSONArray();
+        Initsign initsign = new Initsign();
         initsign.setCourseId(courseId);
         initsign.setEndtime(endtime);
-        System.out.println(initsign);
-        int totalCount=initsignService.gethistoryCountbyCourseid(initsign);
-        List<Coursestudent> coursestudentList=coursestudentService.getcoursestudentbycourseId(courseId);
+        //System.out.println(initsign);
+        int totalCount = initsignService.gethistoryCountbyCourseid(initsign);
+        List<Coursestudent> coursestudentList = coursestudentService.getcoursestudentbycourseId(courseId);
         for (int i = 0; i < coursestudentList.size(); i++) {
-            User user=userService.findByUserid(coursestudentList.get(i).getStudentId());
-            Studentsign studentsign =new Studentsign();
+            User user = userService.findByUserid(coursestudentList.get(i).getStudentId());
+            Studentsign studentsign = new Studentsign();
             studentsign.setCourseId(courseId);
             studentsign.setStudentId(user.getUserId());
-            int issignnum=studentsignService.getissignCountstudentsignById(studentsign);
-            int unsignnum=studentsignService.getunsignCountstudentsignById(studentsign);
-            JSONObject jsonObject=new JSONObject();
-            jsonObject.put("userName",user.getUserName());
-            jsonObject.put("perid",user.getPerid());
-            jsonObject.put("avatar",user.getAvatar());
-            jsonObject.put("issignnum",issignnum);
-            jsonObject.put("unsignnum",unsignnum);
+            int issignnum = studentsignService.getissignCountstudentsignById(studentsign);
+            int unsignnum = studentsignService.getunsignCountstudentsignById(studentsign);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("userName", user.getUserName());
+            jsonObject.put("perid", user.getPerid());
+            jsonObject.put("avatar", user.getAvatar());
+            jsonObject.put("issignnum", issignnum);
+            jsonObject.put("unsignnum", unsignnum);
             jsonArray.add(jsonObject);
         }
         return Result.success().setData(jsonArray).setCode(ResultCodeEnum.OK.getCode()).setCount(totalCount).setMsg("统计签到数据成功");

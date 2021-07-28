@@ -3,42 +3,75 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zx.daoyundev.mapper.StudentsignMapper">
 
-    <select id="geistudentsignById" resultType="com.zx.daoyundev.entity.Studentsign" >
-        select * from studentsign where courseId = #{courseId} and studentId = #{studentId}
+    <select id="geistudentsignById" resultType="com.zx.daoyundev.entity.Studentsign">
+        select *
+        from studentsign
+        where courseId = #{courseId}
+          and studentId = #{studentId}
     </select>
-    <select id="getissignstudentsignById" resultType="com.zx.daoyundev.entity.Studentsign" >
-        select * from studentsign where courseId = #{courseId} and studentId = #{studentId} and signstatus = 2
+    <select id="getissignstudentsignById" resultType="com.zx.daoyundev.entity.Studentsign">
+        select *
+        from studentsign
+        where courseId = #{courseId}
+          and studentId = #{studentId}
+          and signstatus = 2
     </select>
-    <select id="getissignCountstudentsignById" resultType="java.lang.Integer" >
-        select count(*) from studentsign where courseId = #{courseId} and studentId = #{studentId} and signstatus = 2
+    <select id="getissignCountstudentsignById" resultType="java.lang.Integer">
+        select count(*)
+        from studentsign
+        where courseId = #{courseId}
+          and studentId = #{studentId}
+          and signstatus = 2
     </select>
-    <select id="getunsignCountstudentsignById" resultType="java.lang.Integer" >
-        select count(*) from studentsign where courseId = #{courseId} and studentId = #{studentId} and signstatus = 1
+    <select id="getunsignCountstudentsignById" resultType="java.lang.Integer">
+        select count(*)
+        from studentsign
+        where courseId = #{courseId}
+          and studentId = #{studentId}
+          and signstatus = 1
     </select>
-    <select id="getissign" resultType="com.zx.daoyundev.entity.Studentsign" >
-        select * from studentsign where teachersignId = #{teachersignId} and signstatus = 2
+    <select id="getissign" resultType="com.zx.daoyundev.entity.Studentsign">
+        select *
+        from studentsign
+        where teachersignId = #{teachersignId}
+          and signstatus = 2
     </select>
-    <select id="getunsign" resultType="com.zx.daoyundev.entity.Studentsign" >
-        select * from studentsign where teachersignId = #{teachersignId} and signstatus = 1
+    <select id="getunsign" resultType="com.zx.daoyundev.entity.Studentsign">
+        select *
+        from studentsign
+        where teachersignId = #{teachersignId}
+          and signstatus = 1
     </select>
-    <select id="getissigncount" resultType="java.lang.Integer" >
-        select count(*) from studentsign where teachersignId = #{teachersignId} and signstatus = 2
+    <select id="getissigncount" resultType="java.lang.Integer">
+        select count(*)
+        from studentsign
+        where teachersignId = #{teachersignId}
+          and signstatus = 2
     </select>
-    <select id="getunsigncount" resultType="java.lang.Integer" >
-        select count(*) from studentsign where teachersignId = #{teachersignId} and signstatus = 1
+    <select id="getunsigncount" resultType="java.lang.Integer">
+        select count(*)
+        from studentsign
+        where teachersignId = #{teachersignId}
+          and signstatus = 1
     </select>
     <insert id="addsign" useGeneratedKeys="false" keyProperty="studentsignid">
-        insert into studentsign(teachersignId, studentId, courseId, signtype, signstatus) values (#{teachersignId},#{studentId},#{courseId},#{signtype},#{signstatus})
+        insert into studentsign(teachersignId, studentId, courseId, signtype, signstatus)
+        values (#{teachersignId}, #{studentId}, #{courseId}, #{signtype}, #{signstatus})
     </insert>
     <update id="updatesign" parameterType="com.zx.daoyundev.entity.Studentsign">
-        update  studentsign
-        set longitude = #{longitude},latitude = #{latitude},signtime = #{signtime},signstatus = #{signstatus}
-        where teachersignId=#{teachersignId} and studentId=#{studentId}
+        update studentsign
+        set longitude  = #{longitude},
+            latitude   = #{latitude},
+            signtime   = #{signtime},
+            signstatus = #{signstatus}
+        where teachersignId = #{teachersignId}
+          and studentId = #{studentId}
     </update>
     <update id="updateexp" parameterType="com.zx.daoyundev.entity.Studentsign">
-        update  studentsign
+        update studentsign
         set getexp = #{getexp}
-        where teachersignId=#{teachersignId} and studentId=#{studentId}
+        where teachersignId = #{teachersignId}
+          and studentId = #{studentId}
     </update>
     <!--    <delete id="deletesignByteachersignId" parameterType="long">-->
     <!--        delete from studentsign where teachersignId=#{teachersignId}-->

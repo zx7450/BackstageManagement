@@ -19,7 +19,7 @@ public class InitsignServiceImpl implements InitsignService {
     }
 
     @Override
-    public int gethistoryCountbyCourseid(Initsign initsign){
+    public int gethistoryCountbyCourseid(Initsign initsign) {
         return initsignMapper.gethistoryCountbyCourseid(initsign);
     }
 
